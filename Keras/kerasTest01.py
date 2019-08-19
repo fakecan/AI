@@ -8,7 +8,7 @@ from keras.utils import np_utils
 from keras.optimizers import SGD, Adam, RMSprop
 import matplotlib.pyplot as plt
 
-f = open('D:\\study\\keras\\kospi200test.csv', 'r')
+f = open('./data/kospi.csv', 'r')
 dataset = list(csv.reader(f))
 # print(dataset)
 # for line in dataset:
