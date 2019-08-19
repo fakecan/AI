@@ -11,7 +11,7 @@ sess = tf.Session()
 # print("sess.run(node1, node2) : ", sess.run([node1, node2]))  # 노드 성분
 # print("sess.run(node3) : ", sess.run(node3))
 
-a = tf.placeholder(tf.float32)
+a = tf.placeholder(tf.float32)  # placeholder + feed_dict
 b = tf.placeholder(tf.float32)
 adder_node = a + b  # + provides a shortcut for tf.add(a, b)
 

@@ -1,5 +1,4 @@
 # 랜덤값으로 변수 1개를 만들고, 변수의 내용을 출력하시오.
-
 import tensorflow as tf
 tf.set_random_seed(777)
 
@@ -16,14 +15,23 @@ print(W)
 
 W = tf.Variable([0.3], tf.float32)
 
+## 1. sess.run
 # sess = tf.Session()
 # sess.run(tf.global_variables_initializer())
 # aaa = sess.run(W)
 # print(aaa)
 # sess.close()
 
-sess = tf.InteractiveSession()
-sess.run(tf.global_variables_initializer())
-aaa = W.eval()  # sess.run과 같은 표현이다
-print(aaa)
-sess.close()
+## 2. tf.InteractiveSession(), eval()
+# sess = tf.InteractiveSession()
+# sess.run(tf.global_variables_initializer())
+# aaa = W.eval()  # sess.run과 같은 표현이다
+# print(aaa)
+# sess.close()
+
+## 3. eval(session=sess)
+# sess = tf.Session()
+# sess.run(tf.global_variables_initializer())
+# aaa = W.eval(session=sess)  # sess.run과 같은 표현이다
+# print(aaa)
+# sess.close()

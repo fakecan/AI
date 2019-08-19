@@ -20,6 +20,8 @@ train = tf.train.GradientDescentOptimizer(learning_rate=0.01).minimize(cost)
 #   경사하강
 # ■■■■■■■■■■ -------------------- ■■■■■■■■■■
 
+
+# ■■■■■■■■■■ --- model.fit --- ■■■■■■■■■■
 # Launch the graph in a session.
 with tf.Session() as sess:  # with를 씀으로서 close 안해도 된다
     # Initializes global variables in the graph.
@@ -32,3 +34,4 @@ with tf.Session() as sess:  # with를 씀으로서 close 안해도 된다
 
         if step % 20 == 0:
             print(step, cost_val, W_val, b_val)
+# ■■■■■■■■■■ -------------------- ■■■■■■■■■■
