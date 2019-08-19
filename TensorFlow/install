@@ -1,0 +1,7 @@
+명령 프롬프트에서 pip install tensorflow-gpu
+부가: numpy pandas keras matplotlib
+
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0
+(경로명)에 cuDNN 설치
+
+cuda 설치 시, 사용사 설정에 visual inter 체크 해제 후 설치

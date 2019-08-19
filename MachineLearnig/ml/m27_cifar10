@@ -1,0 +1,13 @@
+cifar10
+
+1. 데이터를 300개로 자른다.
+2. generator 사용 증폭
+3. hyperparameter 튜닝  소스1
+4. 최종 소스            소스2
+5. acc 제출
+6. 총 5회까지 제출 가능
+
+kingkeras@naver.com
+메일 제목 : 홍길동 99.9 [1차]
+메일 내용 : 없음
+메일 첨부: hgd_test01.py    hgd_test02.py   acc 스크린샷(전체화면)

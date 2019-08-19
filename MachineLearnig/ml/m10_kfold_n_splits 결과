@@ -1,0 +1,31 @@
+n_splits = 2,
+QuadraticDiscriminantAnalysis 의 정답률 =
+[0.97333333 0.97333333]
+RadiusNeighborsClassifier 의 정답률 =
+[0.97333333 0.93333333]
+LinearDiscriminantAnalysis 의 정답률 = 
+[0.97333333 0.97333333]
+
+n_splits = 3,
+MLPClassifier 의 정답률 = 
+[0.98 0.96 0.98]
+LinearDiscriminantAnalysis 의 정답률 = 
+[0.98 1.   0.96]
+LinearSVC 의 정답률 = 
+[0.94 0.98 0.96]
+
+n_splits = 4
+SVC 의 정답률 =
+[0.97368421 0.94736842 0.94594595 0.97297297]
+MLPClassifier 의 정답률 = 
+[1.         0.92105263 1.         0.97297297]
+LinearDiscriminantAnalysis 의 정답률 = 
+[0.97368421 0.97368421 1.         0.97297297]
+
+n_splits = 5
+DecisionTreeClassifier 의 정답률 = 
+[0.96666667 0.86666667 1.         0.9        0.96666667]
+ExtraTreeClassifier 의 정답률 = 
+[0.96666667 0.9        0.96666667 0.93333333 0.93333333]
+ExtraTreesClassifier 의 정답률 = 
+[0.93333333 0.96666667 0.96666667 0.93333333 0.96666667]

@@ -1,0 +1,19 @@
+# from keras.applications import Xception
+# conv_base = Xception()
+# min(71, 71, 3)
+
+# from keras.applications import InceptionV3
+# conv_base = InceptionV3()
+# min(75, 75, 3)
+
+# from keras.applications import ResNet50
+# conv_base = ResNet50()
+# min(32, 32, 3)
+
+# from keras.applications import VGG19
+# conv_base = VGG19()
+# min(32, 32, 3)
+
+# from keras.applications import MobileNet
+# conv_base = MobileNet()
+# min(32, 32, 3)
