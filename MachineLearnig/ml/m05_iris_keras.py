@@ -56,8 +56,8 @@ clf = Sequential()
 clf.add(Dense(8, input_shape=(4, ), activation='relu'))
 clf.add(Dense(8))
 clf.add(Dense(8))
-clf(Dense(8))
-clf(Dense(1))
+clf.add(Dense(8))
+clf.add(Dense(3))
 clf.add(Activation('softmax'))
 
 #3. 실행

@@ -5,7 +5,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.neighbors import KNeighborsClassifier
 
 # 붓꽃 데이터 읽어들이기
-iris_data = pd.read_csv('.\data\iris.csv', encoding='utf-8',
+iris_data = pd.read_csv('./data/iris.csv', encoding='utf-8',
                         names=['a', 'b', 'c', 'd', 'y']) #, header=None)
 print(iris_data)
 print(iris_data.shape)

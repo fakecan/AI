@@ -7,9 +7,7 @@ from sklearn.model_selection import train_test_split
 # days  start_price  high_price  low_price  final_price   volume  exchange_rate
 
 # ■■■■■■■■■■■■■■■■■■■■ data load
-kospi = pd.read_csv("./MachineLearnig/data/kospi.csv", encoding="UTF-8")
-# kospi = pd.read_csv("/AI/MachineLearnig/data/kospi.csv", encoding="UTF-8")
-
+kospi = pd.read_csv("./data/kospi.csv", encoding="UTF-8")
 
 # print(kospi)
 # print(kospi.shape)    # (599, 7)

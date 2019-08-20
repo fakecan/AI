@@ -9,7 +9,6 @@ xy = np.loadtxt('D:/AI/TensorFlow/data/data-03-diabetes.csv', delimiter=',', dty
 
 x_data = xy[:, 0:-1]
 y_data = xy[:, [-1]]
-
 print(x_data.shape, y_data.shape)
 
 # placeholdes for a tensor that will be always fed.
