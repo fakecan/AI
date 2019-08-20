@@ -34,7 +34,7 @@ sess = tf.Session()
 # Inititalizes global variables in the graph.
 sess.run(tf.global_variables_initializer())
 
-for step in range(2001):
+for step in range(2000001):
     cost_val, hy_val, _ = sess.run([cost, hypothesis, train],
                                     feed_dict={x1: x1_data, x2: x2_data,
                                                x3: x3_data, Y: y_data})

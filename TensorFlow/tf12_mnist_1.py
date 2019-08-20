@@ -35,7 +35,7 @@ is_correct = tf.equal(tf.argmax(hypothesis, 1), tf.argmax(Y, 1))
 accuracy = tf.reduce_mean(tf.cast(is_correct, tf.float32))
 
 # parameters
-num_epochs = 30
+num_epochs = 15
 batch_size = 100
 num_iterations = int(mnist.train.num_examples / batch_size)
 
