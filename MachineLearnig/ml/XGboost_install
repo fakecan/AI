@@ -1,6 +1,0 @@
-
-pip install 'FileName'
-
-Python
->>> import xgboost as xgb
->>> from xgboost import XGBClassifier
