@@ -17,7 +17,6 @@ W1 = tf.Variable(tf.random_normal([2, 100]), name='weight1')
 b1 = tf.Variable(tf.random_normal([100]), name='bias1')
 layer1 = tf.sigmoid(tf.matmul(X, W1) + b1)
 
-'''
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 W2 = tf.Variable(tf.random_normal([100, 50]), name='weight2')
 b2 = tf.Variable(tf.random_normal([50]), name='bias2')
@@ -63,11 +62,10 @@ W12 = tf.Variable(tf.random_normal([60, 1]), name='weight12')
 b12 = tf.Variable(tf.random_normal([1]), name='bias12')
 hypothesis = tf.sigmoid(tf.matmul(layer11, W12) + b12)
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-'''
 
-W2 = tf.Variable(tf.random_normal([100, 1]), name='weight2')
-b2 = tf.Variable(tf.random_normal([1]), name='bias2')
-hypothesis = tf.sigmoid(tf.matmul(layer1, W2) + b2)
+# W2 = tf.Variable(tf.random_normal([100, 1]), name='weight2')
+# b2 = tf.Variable(tf.random_normal([1]), name='bias2')
+# hypothesis = tf.sigmoid(tf.matmul(layer1, W2) + b2)
 
 cost = -tf.reduce_mean(Y * tf.log(hypothesis) + (1 - Y) * tf.log(1 - hypothesis))
 train = tf.train.GradientDescentOptimizer(learning_rate=0.1).minimize(cost)
