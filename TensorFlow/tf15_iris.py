@@ -6,94 +6,104 @@
 import tensorflow as tf
 import numpy as np
 import pandas as pd
+from keras.utils.np_utils import to_categorical
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
 
+# ■■■■■■■■■■■■■■■■■■■■ Dataset Loading ■■■■■■■■■■■■■■■■■■■■
 iris_data = pd.read_csv('./data/iris.csv', encoding='utf-8',
                          names=['SepalLength','SepalWidth','PetalLength','PetalWidth','Name'])
 
-iris_data = np.iris_data
-x_data = iris_data[:, :-1] 
-y_data = iris_data[:, [-1]] 
-# y_data = iris_data.loc[:, 'Name']
-# x_data = iris_data.loc[:,['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth']]
+y_data = iris_data.loc[:, 'Name']
+x_data = iris_data.loc[:,['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth']]
 # print(x.shape, y.shape) # (150, 4) (150,)
 
-# y_data = y_data.reshape(y_data, (-1, 4))
+x_train, x_test, y_train, y_test = train_test_split(
+    x_data, y_data, test_size=0.2, train_size=0.8, shuffle= True
+)
 
-# x_train, x_test, y_train, y_test = train_test_split(
-#     x, y, test_size=0.2, train_size=0.8, shuffle= True
-# )
+# ■■■■■■■■■■■■■■■■■■■■ Data Preprocessing ■■■■■■■■■■■■■■■■■■■■
+def label_Encoding(train, test):    # LabelEncoder
+    encoder = LabelEncoder()
+    encoder.fit(train)
+    train = encoder.transform(train)
+    test = encoder.transform(test)
+    
+    return train, test
 
-# X = tf.placeholder(tf.float32, [None, 150])
-# Y = tf.placeholder(tf.float32, [None, 4])
+y_train, y_test = label_Encoding(y_train, y_test)
+y_train = to_categorical(y_train)
+y_test = to_categorical(y_test)
 
-cnt = 1
-def layer(input, output,uplayer,dropout=0,end=False):
-    global cnt
-    w = tf.get_variable("w%d"%(cnt),shape=[input, output],initializer=tf.contrib.layers.xavier_initializer())
+tf.set_random_seed(777)
+
+# ■■■■■■■■■■■■■■■■■■■■ Model Design ■■■■■■■■■■■■■■■■■■■■
+def input_Layer(x, input, output, keep_prob=0.2):
+    W = tf.Variable(tf.random_normal([input, output]))
     b = tf.Variable(tf.random_normal([output]))
-    if ~end:
-        layer = tf.nn.relu(tf.matmul(uplayer, w)+b)
-    else: layer = tf.matmul(uplayer, w)+b
 
-    if dropout != 0:
-        layer = tf.nn.dropout(layer, keep_prob=dropout)
-    cnt += 1
-    return layer
+    equation = tf.matmul(x, W) + b
+    y = tf.nn.relu(equation)
 
-X = tf.placeholder(tf.float32,[None, 4])
-Y = tf.placeholder(tf.int32,[None, 1])
-keep_prob = 0
+    if keep_prob > 0:
+        y = tf.nn.dropout(y, keep_prob)
+    return y
 
-Y_one_hot = tf.one_hot(Y, 3) # one-hot
-print("one_hot:", Y_one_hot)
-Y_one_hot = tf.reshape(Y_one_hot, [-1, 3])
-print("reshape one_hot:", Y_one_hot)
+def hidden_Layer(x, input, output,
+                 keep_prob=0.2,
+                 weight_name='W',
+                 optimizer='relu',
+                 initialize=tf.contrib.layers.xavier_initializer(),
+                 output_b = False   ):
+    W = tf.get_variable(weight_name, shape=[input, output], initializer=initialize)
+    b = tf.Variable(tf.random_normal([output]))
 
-l1 = layer(4,10,X)
-l2 = layer(10,20,l1)
-l3 = layer(20,10,l2)
+    equation = tf.matmul(x, W) + b
+    if optimizer == 'relu':
+        y = tf.nn.relu(equation)
+    elif optimizer == 'softmax':
+        y = tf.nn.softmax(equation)
+        y = tf.nn.softmax(y)
+    
+    if keep_prob > 0:   y = tf.nn.dropout(y, keep_prob)
+    
+    if output_b:    return y, W
+    else:           return y
+    
+input_node = x_train.shape[-1]
+output_node = y_train.shape[-1]
+print(x_train.shape, y_train.shape)
 
-l4 = layer(10,5,l3)
+# Input Layer
+X = tf.placeholder(tf.float32, [None, input_node])
+Y = tf.placeholder(tf.float32, [None, output_node])
 
-logits = layer(5,3,l4,end=True)
+# Hidden Layers
+h_in = input_Layer(X, input_node, 15, 0)
+h1 = hidden_Layer(h_in, 15, 25, 0.55, 'w1')
+h2 = hidden_Layer(h1, 25, 30, 0.55, 'w2')
+hypothesis, w = hidden_Layer(h2, 30, output_node, 0,
+                            'w_out', 'softmax', output_b=True)
 
+is_correct = tf.equal(tf.argmax(hypothesis, 1), tf.argmax(Y, 1))
+accuracy = tf.reduce_mean(tf.cast(is_correct, tf.float32))
 
-hypothesis = tf.nn.softmax(logits)
-# hypothesis = tf.nn.softmax(logits)
-# cross entropy cost/loss
-# cost = tf.reduce_mean(-tf.reduce_sum(Y * tf.log(hypothesis), axis=1))
-# cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits = hypothesis, labels=Y))
-cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits = logits, labels=tf.stop_gradient([Y_one_hot])))
+cost = tf.reduce_mean(-tf.reduce_sum(Y * tf.log(hypothesis), axis = 1)) # 카테고리컬 크로스 엔트로피
+optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.1).minimize(cost)
 
-# train = tf.train.GradientDescentOptimizer(learning_rate=0.01).minimize(cost)
-train = tf.train.AdamOptimizer(learning_rate=0.001).minimize(cost)
-# train = tf.train.AdadeltaOptimizer(learning_rate=0.1).minimize(cost)
-
-prediction = tf.argmax(hypothesis, 1)
-
-
-correct_prediction = tf.equal(prediction, tf.argmax(Y_one_hot, 1))
-accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
-
-
-
+# Test model
+is_correct = tf.equal(tf.argmax(hypothesis, 1), tf.argmax(Y, 1))
+# Calculate accuracy
+accuracy = tf.reduce_mean(tf.cast(is_correct, tf.float32))
 
 with tf.Session() as sess:
-    # Initialize TensorFlow variables
-    
-
     sess.run(tf.global_variables_initializer())
-    
-    for step in range(5001):
-        _, cost_val, acc_val = sess.run([train, cost, accuracy], feed_dict={X: x_train, Y: y_train})
-        if step % 100 == 0:
-            print("Step: {:5}\tCost: {:.3f}\tAcc: {:.2%}".format(step, cost_val, acc_val))
 
-    # Let's see if we can predict
-    a, pred = sess.run([accuracy, prediction], feed_dict={X: x_train,Y: y_train})
-    # y_data: (N, 1) = flatten => (N, ) matches pred.shape
-    for p, y in zip(pred, y_train.flatten()):
-        print("[{}] Prediction: {} True Y: {}".format(p == int(y), p, int(y)))
-    print(a)
-    writer = tf.summary.FileWriter('./board/sample_1', sess.graph)
+    for step in range(6001):
+        _, cost_val = sess.run([optimizer, cost], feed_dict = {X: x_train, Y: y_train})
+        if step % 100 == 0:
+            print(step, cost_val)
+
+    h, c, a = sess.run([hypothesis, is_correct, accuracy],
+                        feed_dict={X: x_test, Y: y_test})
+    print('Hypothesis:\n', h, '\nCorrect(y)\n', c, '\n Accuracy: ', a)

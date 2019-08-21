@@ -1,71 +1,3 @@
-
-
-# import tensorflow as tf
-# import matplotlib.pyplot as plt
-# import random
-# from tensorflow.examples.tutorials.mnist import input_data
-
-# tf.set_random_seed(777)
-
-# mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
-# # print(mnist.train.images.shape)     # (55000, 784)
-# # print(mnist.test.labels.shape)      # (10000, 10)
-
-
-
-
-
-# nb_classes = 10
-# keep_prob = 0.2
-
-# X = tf.placeholder(tf.float32, [None, 28*28])
-# Y = tf.placeholder(tf.float32, [None, 10])
-
-# W1 = tf.Variable(tf.random_normal([28*28, 30]))
-# b1 = tf.Variable(tf.random_normal([30]))
-# layer1 = tf.nn.relu(tf.matmul(X, W1) + b1)
-# layer1 = tf.nn.dropout(layer1, keep_prob)
-
-# W2 = tf.Variable(tf.random_normal([30, nb_classes]))
-# b2 = tf.Variable(tf.random_normal([nb_classes]))
-# layer2 = tf.nn.relu(tf.matmul(X, W1) + b1)
-# layer2 = tf.nn.dropout(layer2, keep_prob)
-
-
-
-import tensorflow as tf
-import matplotlib.pyplot as plt
-import random
-from tensorflow.examples.tutorials.mnist import input_data
-
-tf.set_random_seed(777)
-
-mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
-# print(mnist.train.images.shape)     # (55000, 784)
-# print(mnist.test.labels.shape)      # (10000, 10)
-
-nb_classes = 10
-
-X = tf.placeholder(tf.float32, [None, 28*28])
-Y = tf.placeholder(tf.float32, [None, 10])
-
-# W = tf.Variable(tf.random_normal([28*28, nb_classes]))
-# b = tf.Variable(tf.random_normal([nb_classes]))
-
-class hiddenLayer:
-    X = None
-    Y1 = None
-    Y2 = None
-    W = None
-    b = None
-
-    def __init__(self, X, input, output):
-        self.W = tf.Variable(tf.random_normal([input, output]))
-        self.b = tf.Variable(tf.random_normal([output]))
-        equation = tf.matmul(X, self.W) + self.b
-        self.Y1 = tf.nn.softmax(equation)
-        self.Y2 = tf.nn.relu(equation)
-
 # # W1 = tf.get_variable("W1", shape=[?, ?],
 # #                      initializer=tf.random_uniform_initializer())
 # # b1 = tf.Variable(tf.random_normal([512]))
@@ -78,35 +10,62 @@ class hiddenLayer:
 # # tf.random_normal_initializer()
 # # tf.contrib.layers.xavier_initializer()
 
-class hiddenLayer2:
-    X = None
-    Y1 = None
-    Y2 = None
+import tensorflow as tf
+import matplotlib.pyplot as plt
+import random
+
+# Dataset
+from tensorflow.examples.tutorials.mnist.input_data import read_data_sets
+mnist = read_data_sets('MNIST_data/', one_hot=True)
+
+# Input Layer
+X = tf.placeholder(tf.float32, [None, 28*28])
+Y = tf.placeholder(tf.float32, [None, 10])
+
+# Hidden Layer
+class hidden_input:
     W = None
     b = None
+    x = None
+    y1 = None
+    y2 = None
 
-    def __init__(self, X, input, output, name="W"):
-        self.W = tf.get_variable(name, shape = [input, output], initializer=tf.contrib.layers.xavier_initializer())
-        self.b = tf.Variable(tf.random_normal([output]))
-        equation = tf.matmul(X, self.W) + self.b
-        self.Y1 = tf.nn.softmax(equation)
-        self.Y2 = tf.nn.relu(equation)
+    def __init__(self, x, input_node, ouput_node):
+        self.W = tf.Variable(tf.random_normal([input_node, ouput_node]))
+        self.b = tf.Variable(tf.random_normal([ouput_node]))
+        logics = tf.matmul(x, self.W) + self.b
+        self.y1 = tf.nn.sigmoid(logics)
+        self.y2 = tf.nn.relu(self.y1)
 
-h1 = hiddenLayer(X, 28*28, 16)
-h2 = hiddenLayer2(h1.Y2, 16, 8)
-h3 = hiddenLayer2(h2.Y2, 8, 64)
-h4 = hiddenLayer2(h3.Y2, 64, 12)
-h5 = hiddenLayer2(h4.Y2, 12, 2)
-h6 = hiddenLayer2(h5.Y2, 2, 8)
-h7 = hiddenLayer2(h6.Y2, 8, 16)
-h8 = hiddenLayer2(h7.Y2, 16, 8)
-h9 = hiddenLayer2(h8.Y2, 8, 4)
-h10 = hiddenLayer(h9.Y1, 4, nb_classes)
+class hidden_Layer:
 
-W = h10.W
-hypothesis = h10.Y1
+    W = None
+    b = None
+    L1 = None
+    L2 = None
 
-# hypothesis = tf.nn.softmax(tf.matmul(X, W) + b)
+    def __init__(self, x, input_node, ouput_node, keep_prob, name = 'w', initialize = tf.contrib.layers.xavier_initializer()):
+        self.W = tf.get_variable(name, shape = [input_node, ouput_node], initializer = initialize)
+        self.b = tf.Variable(tf.random_normal([ouput_node]))
+        
+        logics = tf.matmul(x, self.W) + self.b
+        if keep_prob <= 0:
+            self.L1 = tf.nn.relu(logics)
+            self.L2 = tf.nn.softmax(self.L1)
+        else:
+            self.L1 = tf.nn.relu(logics)
+            self.L2 = tf.nn.dropout(self.L1, keep_prob)
+
+
+h1 = hidden_input(X, 28*28, 25)
+h2 = hidden_Layer(h1.y2, 25, 50, 0.5,'w2')
+h3 = hidden_Layer(h2.L2, 50, 50, 0.5, 'w3')
+h4 = hidden_Layer(h3.L2, 50, 10, 0,'w4')
+
+w = h4.W
+hypothesis = h4.L2
+
+# loss function
 cost = tf.reduce_mean(-tf.reduce_sum(Y * tf.log(hypothesis), axis=1))
 train = tf.train.GradientDescentOptimizer(learning_rate=0.1).minimize(cost)
 
@@ -116,7 +75,7 @@ is_correct = tf.equal(tf.argmax(hypothesis, 1), tf.argmax(Y, 1))
 accuracy = tf.reduce_mean(tf.cast(is_correct, tf.float32))
 
 # parameters
-num_epochs = 10
+num_epochs = 30
 batch_size = 100
 num_iterations = int(mnist.train.num_examples / batch_size)
 
