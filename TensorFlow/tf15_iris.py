@@ -62,7 +62,7 @@ def hidden_Layer(x, input, output, keep_prob=0.2,
         y = tf.nn.relu(equation)
     elif optimizer == 'softmax':
         y = tf.nn.softmax(equation)
-        # y = tf.nn.softmax(y)    # ?
+        y = tf.nn.softmax(y)
     
     if keep_prob > 0:   y = tf.nn.dropout(y, keep_prob)
     
