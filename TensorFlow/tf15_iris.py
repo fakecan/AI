@@ -18,6 +18,7 @@ y_data = iris_data.loc[:, 'Name']
 x_data = iris_data.loc[:,['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth']]
 # print(x.shape, y.shape) # (150, 4) (150,)
 
+# ■■■■■■■■■■■■■■■■■■■■ Data Splitting ■■■■■■■■■■■■■■■■■■■■
 x_train, x_test, y_train, y_test = train_test_split(
     x_data, y_data, test_size=0.2, train_size=0.8, shuffle= True
 )
@@ -49,10 +50,8 @@ def input_Layer(x, input, output, keep_prob=0.2):
         y = tf.nn.dropout(y, keep_prob)
     return y
 
-def hidden_Layer(x, input, output,
-                 keep_prob=0.2,
-                 weight_name='W',
-                 optimizer='relu',
+def hidden_Layer(x, input, output, keep_prob=0.2,
+                 weight_name='W', optimizer='relu',
                  initialize=tf.contrib.layers.xavier_initializer(),
                  output_b = False   ):
     W = tf.get_variable(weight_name, shape=[input, output], initializer=initialize)
@@ -63,14 +62,14 @@ def hidden_Layer(x, input, output,
         y = tf.nn.relu(equation)
     elif optimizer == 'softmax':
         y = tf.nn.softmax(equation)
-        y = tf.nn.softmax(y)
+        # y = tf.nn.softmax(y)    # ?
     
     if keep_prob > 0:   y = tf.nn.dropout(y, keep_prob)
     
     if output_b:    return y, W
     else:           return y
     
-input_node = x_train.shape[-1]
+input_node = x_train.shape[-1]  # column value
 output_node = y_train.shape[-1]
 print(x_train.shape, y_train.shape)
 
