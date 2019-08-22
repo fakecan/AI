@@ -1,0 +1,20 @@
+1. Classification(ºÐ·ù)
+
+1) Sofmax
+hypothesis = tf.nn.softmax(tf.matmul(X, W) + b)
+cost = tf.reduce_mean(-tf.reduce_sum(Y * tf.log(hypothesis), axis=1))
+optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.1).minimize(cost)
+
+2) Sigmoid
+hypothesis = tf.sigmoid(tf.matmul(X, W) + b)
+cost = -tf.reduce_mean(Y * tf.log(hypothesis) + (1 - Y) * tf.log(1 - hypothesis))
+train = tf.train.GradientDescentOptimizer(learning_rate=0.01).minimize(cost)
+
+prediction = tf.argmax(hypothesis, 1)
+correct_prediction = tf.equal(prediction, tf.argmax(Y_one_hot, 1))
+accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
+
+2. Regression(È¸±Í)
+cost = tf.reduce_mean(tf.square(hypothesis - Y))
+optimizer = tf.train.GradientDescentOptimizer(learning_rate=1e-5)
+train = optimizer.minimize(cost)

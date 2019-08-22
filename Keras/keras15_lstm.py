@@ -20,23 +20,23 @@ x_train = dataset[:, 0:4] #(6,4)
 y_train = dataset[:, 4, ] #(6, )
 
 print("====================")
-print(x_train.shape)
+print(x_train.shape)    # (6, 4)
 # print(x_train)
 # print("====================")
-print(y_train.shape)
+print(y_train.shape)    # (6,)
 # print(y_train)
-print(len(a))
+print(len(a))   # 10
 x_train = np.reshape(x_train, (len(a) - size + 1, 4, 1))
 
-print(x_train.shape)
-'''
+print(x_train.shape)    # (6, 4, 1)
+
 x_test = np.array([[[11],[12],[13],[14]], [[12],[13],[14],[15]],
                    [[13],[14],[15],[16]], [[14],[15],[16],[17]]])
 
 y_test = np.array([15,16,17,18])
 
-print(x_test.shape)
-print(y_test.shape)
+print(x_test.shape) # (4, 4, 1)
+print(y_test.shape) # (4,)
 
 #2. 모델 구성
 model = Sequential()
@@ -76,4 +76,3 @@ y_predict = model.predict(x_test)
 print('loss : ', loss)
 print('acc : ', acc)
 print('y_predict(x_test) : \n', y_predict)
-    '''
