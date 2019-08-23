@@ -16,7 +16,7 @@ iris_data = pd.read_csv('./data/iris.csv', encoding='utf-8',
 
 y_data = iris_data.loc[:, 'Name']
 x_data = iris_data.loc[:,['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth']]
-# print(x.shape, y.shape) # (150, 4) (150,)
+# print(x_data.shape, y_data.shape) # (150, 4) (150,)
 
 # ■■■■■■■■■■■■■■■■■■■■ Data Splitting ■■■■■■■■■■■■■■■■■■■■
 x_train, x_test, y_train, y_test = train_test_split(
