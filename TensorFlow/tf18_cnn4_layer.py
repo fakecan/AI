@@ -1,11 +1,9 @@
 import tensorflow as tf
 import random
 # import matplotlib.pyplot as plt
-
-from tensorflow.keras.datasets.cifar10 import load_data
-
+from tensorflow.examples.tutorials.mnist import input_data
 tf.set_random_seed(777)
-cifar10 = input_data.read_data_sets("CIFAR10_data/", one_hot=True)  # one_hot 처리
+mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)  # one_hot 처리
 
 # hyper parameters
 learning_rate = 0.001
@@ -42,13 +40,26 @@ L2 = tf.nn.relu(L2)
 L2 = tf.nn.max_pool(L2, ksize=[1, 2, 2, 1],
                       strides=[1, 2, 2, 1], padding='SAME')
 # print("L2: ", L2)   # shape=(?, 7, 7, 64)                     
-L2_flat = tf.reshape(L2, [-1, 7 * 7 * 64])
+
+# from tensorflow.keras import keras
+# ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+L3 = tf.layers.conv2d(L2, 64, [3, 3], activation=tf.nn.relu)    # L3 = tf.keras.layers.conv2d도 가능하다
+L3 = tf.layers.max_pooling2d(L3, [2, 2], [2, 2])
+L3 = tf.layers.dropout(L3, 0.7)
+
+L4 = tf.contrib.layers.flatten(L3)
+L4 = tf.layers.dense(L4, 256, activation=tf.nn.relu)
+L4 = tf.layers.dropout(L4, 0.5)
+
+logits = tf.layers.dense(L4, 10, activation=None)
+# ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+# L2_flat = tf.reshape(L2, [-1, 7 * 7 * 64])
 
 # Final FC 7x7x64 inputs -> 10 outputs
-W3 = tf.get_variable("W3", shape=[7 * 7 * 64, 10],
-                     initializer=tf.contrib.layers.xavier_initializer())
-b = tf.Variable(tf.random_normal([10]))
-logits = tf.matmul(L2_flat, W3) + b
+# W3 = tf.get_variable("W3", shape=[7 * 7 * 64, 10],
+#                      initializer=tf.contrib.layers.xavier_initializer())
+# b = tf.Variable(tf.random_normal([10]))
+# logits = tf.matmul(L2_flat, W3) + b
 
 # define cost/loss & optimizer
 cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(
