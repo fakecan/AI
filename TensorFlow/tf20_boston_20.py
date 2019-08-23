@@ -47,7 +47,7 @@ hypothesis = tf.layers.dense(L3, 1, activation=tf.nn.relu)
 
 cost = tf.reduce_mean(tf.square(hypothesis - Y))
 # train = tf.train.GradientDescentOptimizer(learning_rate=1e-5).minimize(cost)
-train = tf.train.MomentumOptimizer(learning_rate=0.01, momentum=0.5).minimize(cost)
+train = tf.train.MomentumOptimizer(learning_rate=0.001, momentum=0.9).minimize(cost)
 
 # Launch the graph in Sesstion
 from sklearn.metrics import r2_score, mean_squared_error
