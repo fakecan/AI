@@ -1,13 +1,15 @@
 import tensorflow as tf
 import random
 # import matplotlib.pyplot as plt
-from tensorflow.examples.tutorials.mnist import input_data
+
+from tensorflow.keras.datasets.cifar10 import load_data
+
 tf.set_random_seed(777)
-mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)  # one_hot 처리
+cifar10 = input_data.read_data_sets("CIFAR10_data/", one_hot=True)  # one_hot 처리
 
 # hyper parameters
 learning_rate = 0.001
-training_epochs = 100
+training_epochs = 15
 batch_size = 100
 
 # input place holders
@@ -39,36 +41,14 @@ L2 = tf.nn.conv2d(L1, W2, strides=[1, 1, 1, 1], padding='SAME')
 L2 = tf.nn.relu(L2)
 L2 = tf.nn.max_pool(L2, ksize=[1, 2, 2, 1],
                       strides=[1, 2, 2, 1], padding='SAME')
-# print("L2: ", L2)   # shape=(?, 7, 7, 64)
-
-# L3 ImgIn shape=(?, 7, 7, 64)
-W3 = tf.Variable(tf.random_normal([3, 3, 64, 32], stddev=0.01))
-# print("W3: ", W3)   # shape=(3, 3, 64, 32)
-L3 = tf.nn.conv2d(L2, W3, strides=[1, 1, 1, 1], padding='SAME')
-L3 = tf.nn.relu(L3)
-# print("L3: ", L3)   # shape=(?, 7, 7, 32)
-
-# L4 ImgIn shape=(?, 7, 7, 32)
-W4 = tf.Variable(tf.random_normal([3, 3, 32, 16], stddev=0.01))
-# print("W4: ",  W4)  # shape=(3, 3, 32, 16)
-L4 = tf.nn.conv2d(L3, W4, strides=[1, 1, 1, 1], padding='SAME')
-L4 = tf.nn.relu(L4)
-L4 = tf.nn.max_pool(L4, ksize=[1, 2, 2, 1],
-                      strides=[1, 2, 2, 1], padding='SAME')
-# print("L4: ", L4)   # shape=(?, 4, 4, 16)
-L4_flat = tf.reshape(L4, [-1, 4 * 4 * 16])
-
-#
-W5 = tf.get_variable("W5", shape=[4 * 4 * 16, 32],
-                     initializer=tf.contrib.layers.xavier_initializer())
-b5 = tf.Variable(tf.random_normal([32]))
-logits = tf.matmul(L4_flat, W5) + b5
+# print("L2: ", L2)   # shape=(?, 7, 7, 64)                     
+L2_flat = tf.reshape(L2, [-1, 7 * 7 * 64])
 
 # Final FC 7x7x64 inputs -> 10 outputs
-W6 = tf.get_variable("W6", shape=[32 , 10],
+W3 = tf.get_variable("W3", shape=[7 * 7 * 64, 10],
                      initializer=tf.contrib.layers.xavier_initializer())
-b6 = tf.Variable(tf.random_normal([10]))
-logits = tf.matmul(logits, W6) + b6
+b = tf.Variable(tf.random_normal([10]))
+logits = tf.matmul(L2_flat, W3) + b
 
 # define cost/loss & optimizer
 cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(
@@ -104,25 +84,3 @@ print('Accuracy:', sess.run(accuracy, feed_dict={X: mnist.test.images, Y: mnist.
 r = random.randint(0, mnist.test.num_examples - 1)
 print('Label: ', sess.run(tf.argmax(mnist.test.labels[r:r + 1], 1)))
 print("Prediction: ", sess.run(tf.argmax(logits, 1), feed_dict={X: mnist.test.images[r:r + 1]}))
-
-
-# learning_rate = 0.001
-# training_epochs = 100
-# batch_size = 100
-
-# Epoch: 0001 cost= 0.365512645
-# Epoch: 0002 cost= 0.096502545
-# Epoch: 0003 cost= 0.066636597
-# ...
-# Epoch: 0098 cost= 0.000000107
-# Epoch: 0099 cost= 0.000000082
-# Epoch: 0100 cost= 0.000000061
-# Learning Finished!
-# Accuracy: 0.9929
-# Label:  [4]
-# Prediction:  [4]
-
-# batch_size = 64
-# Accuracy: 0.9922
-# Label:  [1]
-# Prediction:  [1]
