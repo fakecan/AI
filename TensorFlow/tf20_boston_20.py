@@ -1,4 +1,4 @@
-#    ghlrnl
+#   회귀
 import tensorflow as tf
 import numpy as np
 import pandas as pd
@@ -38,14 +38,16 @@ print(input_dim, output_dim)
 X = tf.placeholder(tf.float32, [None, input_dim])
 Y = tf.placeholder(tf.float32, [None, output_dim])
 
-L1 = tf.layers.dense(X, 1600, activation=tf.nn.relu)
-# L1 = tf.layers.dropout(L1, 0.3)
-L2 = tf.layers.dense(L1, 3200, activation=tf.nn.relu)
-L3 = tf.layers.dense(L2, 1800, activation=tf.nn.relu)
-hypothesis = tf.layers.dense(L3, 1, activation=None)
+L1 = tf.layers.dense(X, 16, activation=tf.nn.relu)
+L1 = tf.layers.dropout(L1, 0.3)
+L2 = tf.layers.dense(L1, 32, activation=tf.nn.relu)
+L2 = tf.layers.dropout(L2, 0.3)
+L3 = tf.layers.dense(L2, 18, activation=tf.nn.relu)
+hypothesis = tf.layers.dense(L3, 1, activation=tf.nn.relu)
 
 cost = tf.reduce_mean(tf.square(hypothesis - Y))
-train = tf.train.GradientDescentOptimizer(learning_rate=1e-5).minimize(cost)
+# train = tf.train.GradientDescentOptimizer(learning_rate=1e-5).minimize(cost)
+train = tf.train.MomentumOptimizer(learning_rate=0.01, momentum=0.5).minimize(cost)
 
 # Launch the graph in Sesstion
 from sklearn.metrics import r2_score, mean_squared_error
@@ -53,11 +55,14 @@ from sklearn.metrics import r2_score, mean_squared_error
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
 
-    for step in range(100001):
+    for step in range(30001):
         cost_val, _ = sess.run([cost, train], feed_dict={X: x_train, Y:y_train} )
-        if step % 500 == 0: print('>>',step, 'cost:',cost_val)
+        if step % 100 == 0: print('>>',step, 'cost:',cost_val)
     
     h = sess.run(hypothesis, feed_dict={X: x_test})
-    r2Score = r2_score(y_test, h) # 높을 수록 좋음.
+    r2Score = r2_score(y_test, h) # 높을수록 좋음.
     rmseScore = np.sqrt(mean_squared_error(y_test, h)) # 낮을 수록 좋다.
     print('R2:', r2Score, 'RMSE:', rmseScore)
+
+# 100000 cost: 9.26363
+# R2: 0.9263859516153254 RMSE: 2.480499625655286
