@@ -7,8 +7,8 @@ mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)  # one_hot 처리
 
 # hyper parameters
 learning_rate = 0.001
-training_epochs = 15
-batch_size = 100
+training_epochs = 30
+batch_size = 64
 
 # input place holders
 X = tf.placeholder(tf.float32, [None, 28*28])
@@ -39,14 +39,36 @@ L2 = tf.nn.conv2d(L1, W2, strides=[1, 1, 1, 1], padding='SAME')
 L2 = tf.nn.relu(L2)
 L2 = tf.nn.max_pool(L2, ksize=[1, 2, 2, 1],
                       strides=[1, 2, 2, 1], padding='SAME')
-# print("L2: ", L2)   # shape=(?, 7, 7, 64)                     
-L2_flat = tf.reshape(L2, [-1, 7 * 7 * 64])
+# print("L2: ", L2)   # shape=(?, 7, 7, 64)
+
+# L3 ImgIn shape=(?, 7, 7, 64)
+W3 = tf.Variable(tf.random_normal([3, 3, 64, 32], stddev=0.01))
+# print("W3: ", W3)   # shape=(3, 3, 64, 32)
+L3 = tf.nn.conv2d(L2, W3, strides=[1, 1, 1, 1], padding='SAME')
+L3 = tf.nn.relu(L3)
+# print("L3: ", L3)   # shape=(?, 7, 7, 32)
+
+# L4 ImgIn shape=(?, 7, 7, 32)
+W4 = tf.Variable(tf.random_normal([3, 3, 32, 16], stddev=0.01))
+# print("W4: ",  W4)  # shape=(3, 3, 32, 16)
+L4 = tf.nn.conv2d(L3, W4, strides=[1, 1, 1, 1], padding='SAME')
+L4 = tf.nn.relu(L3)
+L4 = tf.nn.max_pool(L4, ksize=[1, 2, 2, 1],
+                      strides=[1, 2, 2, 1], padding='SAME')
+print("L4: ", L4)   # shape=(?, 4, 4, 32)
+L4_flat = tf.reshape(L4, [-1, 4 * 4 * 32])
+
+#
+W5 = tf.get_variable("W5", shape=[4 * 4 * 32, 20],
+                     initializer=tf.contrib.layers.xavier_initializer())
+b5 = tf.Variable(tf.random_normal([20]))
+logits = tf.matmul(L4_flat, W5) + b5
 
 # Final FC 7x7x64 inputs -> 10 outputs
-W3 = tf.get_variable("W3", shape=[7 * 7 * 64, 10],
+W6 = tf.get_variable("W6", shape=[20 , 10],
                      initializer=tf.contrib.layers.xavier_initializer())
-b = tf.Variable(tf.random_normal([10]))
-logits = tf.matmul(L2_flat, W3) + b
+b6 = tf.Variable(tf.random_normal([10]))
+logits = tf.matmul(logits, W6) + b6
 
 # define cost/loss & optimizer
 cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(
