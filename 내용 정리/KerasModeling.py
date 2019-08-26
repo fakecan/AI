@@ -1,8 +1,8 @@
 from keras.models import Sequential
 from keras.layers import Dropout, Flatten, BatchNormalization, Dense, LSTM, Conv2D 
-from keras import regularizers
 import numpy as np
 import tensorflow as tf
+from keras import regularizers
 
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ Dataset Loading ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 x_train = []
@@ -12,10 +12,11 @@ y_test = []
 
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ Data Splitting ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test = train_test_split     (
-    x, y, random_state=0, train_size=0.8, test_size=0.2 )
+x_train, x_test, y_train, y_test = train_test_split(
+    x, y, random_state=0, train_size=0.8, test_size=0.2
+)
 
-# ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ to_categorical ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+# ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ to_categorical OR labeling ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ Model Design ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -38,6 +39,7 @@ model.fit(x_train, y_train, epochs=128, batch_size=128,
 
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ Model Evaluate&Predict ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 loss, acc = model.evaluate(x_test, y_test, batch_size=128)
+print("Accuracy: ", acc)
 
 y_predict = model.predict(x_test)
 print(y_predict)
