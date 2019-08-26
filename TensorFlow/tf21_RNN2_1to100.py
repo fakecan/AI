@@ -39,12 +39,11 @@ y_data = y_data.reshape(-1, 1)
 
 # x_data = x_data.reshape(1, 94, 6)
 # y_data = y_data.reshape(1, 94, 1)
-# print(x_data.shape, y_data.shape)   #
-
+# print(x_data.shape, y_data.shape)
 
 from sklearn.model_selection import train_test_split
 x_train, x_test, y_train, y_test = train_test_split(
-    x_data, y_data, random_state=66, test_size=0.5, train_size=0.5,
+    x_data, y_data, random_state=66, test_size=0.2, train_size=0.8,
 )
 # print(x_train.shape, x_test.shape)  # (75, 6) (19, 6)
 # print(y_train.shape, y_test.shape)  # (75, 1) (19, 1)
@@ -77,7 +76,8 @@ print("Accuracy: ", acc)
 x_input = np.array(range(95, 111))
 x_input = split_n(x_input, 7)
 x_input = x_input[:, :6]
-x_input = x_input.reshape(-1, 1, 6) #1행 3열. 1,3, ?
+
+x_input = x_input.reshape(-1, 1, 6)
 y_predict = model.predict(x_input, verbose=1)
 print(y_predict)
 # print(x_input)
