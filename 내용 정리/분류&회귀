@@ -1,5 +1,27 @@
-#   iris 다중 분류
-#   cancer 이진 분류(sigmoid)
+#   Mnist       60000 28 28
+from keras.datasets import mnist #6만장에 대한 데이터
+from keras.utils import np_utils 
+
+Y_train = np_utils.to_categorical(Y_train)
+Y_test = np_utils.to_categorical(Y_test)
+
+#   CIFAR10     50000 32 32 3
+from keras.datasets import cifar10
+from keras.utils import np_utils
+
+Y_train = np_utils.to_categorical(Y_train)
+Y_test = np_utils.to_categorical(Y_test)
+
+#   iris        x (150, 4) y (150,)
+다중 분류
+from sklearn.preprocessing import LabelEncoder
+
+#   cancer      x (569, 30) y (569,)
+이진 분류(sigmoid)
+x_data = cancer['data']     # cancer.data
+y_data = cancer['target']   # cancer.target
+print(x_data.shape, y_data.shape) #(569, 30) (569,)
+
 #   boston 회귀
 
 

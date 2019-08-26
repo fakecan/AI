@@ -15,6 +15,26 @@ x_train, x_test, y_train, y_test = train_test_split(
 )
 
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ Data Preprocessing ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+from keras.utils import to_categorical
+y_train = to_categorical(y_train)
+y_test = to_categorical(y_test)
+
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+scaler = StandardScaler() #또는 MinMaxScaler
+scaler.fit(x_train)
+x_train = scaler.transform(x_train)
+x_test = scaler.transform(x_test)
+
+def data_scaler(train, test):
+    for scaler in [MinMaxScaler()]:
+        scaler.fit(train)
+        train = scaler.transform(train)
+        test = scaler.transform(test)
+    return train, test
+x_train, x_test = data_scaler(x_train, x_test)
+
+x_train = x_train.astype('float32') / 255
+x_test = x_test.astype('float32') / 255
 
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ Model Design ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 model = Sequential()

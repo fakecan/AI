@@ -14,7 +14,6 @@ iris_data = pd.read_csv('./data/iris.csv', encoding='utf-8',
 print(iris_data.shape)
 print(type(iris_data))
 
-
 # iris_data = iris_data.astype('float32')
 # try: float(np.array(iris_data))
 # except ValueError: pass 
@@ -38,7 +37,6 @@ y2 = enc.fit_transform(y.values.reshape(-1,1)).toarray()
 print(y[0], " -- one hot enocding --> ", y2[0])
 print(y[50], " -- one hot enocding --> ", y2[50])
 print(y[100], " -- one hot enocding --> ", y2[100])
-
 
 # 학습 전용과 테스트 전용 분리하기
 x_train, x_test, y_train, y_test = train_test_split(
@@ -64,8 +62,6 @@ clf.add(Activation('softmax'))
 clf.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 clf.fit(x_train, y_train, epochs=200, batch_size=2)
-
-
 
 #4. 평가 및 예측
 acc = clf.evaluate(x_test, y_test)
