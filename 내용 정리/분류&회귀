@@ -1,6 +1,10 @@
-#   Mnist       60000 28 28
-from keras.datasets import mnist #6만장에 대한 데이터
+#   Mnist
+from keras.datasets import mnist
 from keras.utils import np_utils 
+(train_images, train_labels), (test_images, test_labels) = mnist.load_data()
+
+print(train_images.shape, test_images.shape)    # (60000, 28, 28) (10000, 28, 28)
+print(train_labels.shape, test_labels.shape)    # (60000,) (10000,)
 
 Y_train = np_utils.to_categorical(Y_train)
 Y_test = np_utils.to_categorical(Y_test)
