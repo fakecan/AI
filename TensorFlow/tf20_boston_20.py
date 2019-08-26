@@ -47,7 +47,7 @@ hypothesis = tf.layers.dense(L3, 1, activation=tf.nn.relu)
 
 cost = tf.reduce_mean(tf.square(hypothesis - Y))
 # train = tf.train.GradientDescentOptimizer(learning_rate=1e-5).minimize(cost)
-train = tf.train.MomentumOptimizer(learning_rate=0.001, momentum=0.9).minimize(cost)
+train = tf.train.MomentumOptimizer(learning_rate=0.001, momentum=0.8).minimize(cost)
 
 # Launch the graph in Sesstion
 from sklearn.metrics import r2_score, mean_squared_error
@@ -55,7 +55,7 @@ from sklearn.metrics import r2_score, mean_squared_error
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
 
-    for step in range(30001):
+    for step in range(20001):
         cost_val, _ = sess.run([cost, train], feed_dict={X: x_train, Y:y_train} )
         if step % 100 == 0: print('>>',step, 'cost:',cost_val)
     
