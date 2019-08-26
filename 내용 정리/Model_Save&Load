@@ -16,7 +16,7 @@ b = np.load("aaa.npy")  # 불러오기
 print(b)
 
 ■■■■■■■■■■ pandas를 numpy로 바꾸기 ■■■■■■■■■■
-판다스.value
+pandas.value
 
 ■■■■■■■■■■ csv 불러오기 ■■■■■■■■■■
 dataset = numpy.loadtxt("./data/pima-indians-diabetes.csv", delimeter=",")

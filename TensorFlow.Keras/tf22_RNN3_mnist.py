@@ -3,7 +3,7 @@ import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets("./mnist/data/", one_hot=True)
 
-# ■■■■■■■■■■■■ Option set up ■■■■■■■■■■■■
+# ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ Option set up ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 learning_rate = 0.001
 total_epoch = 30
 batch_size = 128
@@ -14,7 +14,7 @@ n_step = 28
 n_hidden = 128
 n_class = 10
 
-# ■■■■■■■■■■■■ Neural network Model Composition ■■■■■■■■■■■■
+# ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ Neural Network Model Composition ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 X = tf.placeholder(tf.float32, [None, n_step, n_input])
 Y = tf.placeholder(tf.float32, [None, n_class])
 
@@ -53,7 +53,7 @@ cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=model, l
 
 optimizer = tf.train.AdamOptimizer(learning_rate).minimize(cost)
 
-# ■■■■■■■■■■■■ Neural network Model Learning ■■■■■■■■■■■■
+# ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ Neural Network Model Learning ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 sess = tf.Session()
 sess.run(tf.global_variables_initializer())
 
@@ -76,7 +76,7 @@ for epoch in range(total_epoch):
 
 print('최적화 완료!')
 
-# ■■■■■■■■■■■■ Result confirm ■■■■■■■■■■■■
+# ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ Result Confirm ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 is_correct = tf.equal(tf.argmax(model, 1), tf.argmax(Y, 1))
 accuracy = tf.reduce_mean(tf.cast(is_correct, tf.float32))
 

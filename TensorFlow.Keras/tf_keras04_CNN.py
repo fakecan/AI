@@ -1,8 +1,5 @@
-from tensorflow.keras import layers, models
-
 # from tensorflow.keras.layers import Conv2D, MaxPool2D, Flatten, Dense, Dropout
 # from tensorflow.keras.models import Sequential
-
 
 # model = Sequential()
 
@@ -18,6 +15,7 @@ from tensorflow.keras import layers, models
 # model.add(Dense(10, activation='softmax'))
 
 
+from tensorflow.keras import layers, models
 
 model = models.Sequential()
 

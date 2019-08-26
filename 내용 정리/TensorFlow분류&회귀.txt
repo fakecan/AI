@@ -23,6 +23,6 @@ train = optimizer.minimize(cost)
 cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=logits,
                                                                  labels=tf.stop_gradient([Y_one_hot])))
 optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.1).minimize(cost)
-# 같은 코드
-# cost = tf.reduce_mean(-tf.reduce_sum(Y * tf.log(hypothesis), axis=1))
-# optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.1).minimize(cost)
+# 서로 같은 코드이다
+cost = tf.reduce_mean(-tf.reduce_sum(Y * tf.log(hypothesis), axis=1))
+optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.1).minimize(cost)

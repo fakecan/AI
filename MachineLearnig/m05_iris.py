@@ -11,7 +11,6 @@ print(iris_data)
 print(iris_data.shape)
 print(type(iris_data))
 
-
 # 붓꽃 데이터를 레이블과 입력 데이터로 분리하기
 y = iris_data.loc[:, "y"]
 x = iris_data.loc[:,["a", "b", "c", "d"]]
@@ -26,13 +25,12 @@ print(y.shape) #
 # 학습 전용과 테스트 전용 분리하기
 x_train, x_test, y_train, y_test = train_test_split(
     x, y, test_size=0.2, train_size=0.7, shuffle=True
-    )
+)
 
 # print(y_test) # str 형식으로 저장되어 있다
 
 # print(x_train.shape)
 # print(x_test.shape)
-
 
 # 학습하기
 # clf = KNeighborsClassifier(n_neighbors=1)

@@ -1,19 +1,27 @@
-1. ANACONDA
+1. CUDA & cuDNN
+CUDA 설치 시, 사용자 정의 설치로 체크한 후 CUDA - Visual Studio Integration 체크 해제 후 설치
+명령 프롬프트에서 pip install tensorflow-gpu
+
+cuDNN 설치 후,
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0
+(경로명)에 cuDNN 파일을 복사해서 붙여넣는다.
+
+2. ANACONDA
 All Users check
 PATH check
 
-명령 프롬프트에서 python 입력
-ctrl Z로 빠져나간 후, pip install tensorflow(설치)
+명령 프롬프트에서 python 입력해서 확인하고 Ctrl Z로 나간 뒤,
+pip install tensorflow(설치)
 
-python들어간 후, import tensorflow as tf
+python 들어간 후, import tensorflow as tf
 tf.__version__ or print(tf.__version__)
 
-pip install keras(설치)
-pip install sklearn(설치)
+pip install keras
+pip install sklearn
 
-2. XGboost
+3. XGboost
 pip install 'FileName'
 
-Python
+python
 >>> import xgboost as xgb
 >>> from xgboost import XGBClassifier
