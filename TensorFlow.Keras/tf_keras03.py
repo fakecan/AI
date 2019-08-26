@@ -23,11 +23,20 @@ import tensorflow as tf
 x_train, y_train = x[:150], y[:150]
 x_test, y_test = x[:150], y[:150]
 
+'''
 model = tf.keras.Sequential()
 # from keras.models import Sequential
 # model = Sequential()
 
 model.add(tf.keras.layers.Dense(units=1, input_dim=1))
+'''
+
+# ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 추가 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+input = tf.keras.Input(shape=(1,))
+output = tf.keras.layers.Dense(1)(input)
+
+model = tf.keras.Model(input, output)
+# ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 model.summary()
 

@@ -52,9 +52,8 @@ x_train, x_test, y_train, y_test = train_test_split(
 x_train = x_train.reshape(-1, 1, 6)
 x_test = x_test.reshape(-1, 1, 6)
 # print(x_train.shape, x_test.shape)  # (47, 1, 6) (47, 1, 6)
-print(x_train, "\n", x_test)
+# print(x_train, "\n", x_test)
 
-'''
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ Model Design ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 model = Sequential()
 
@@ -66,7 +65,7 @@ model.add(Dense(1))
 model.compile(optimizer='adam', loss='mse', metrics=['accuracy'])
 
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ Model Fit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-model.fit(x_train, y_train, epochs=200, batch_size=1)
+model.fit(x_train, y_train, epochs=100, batch_size=1)
 
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ Model Evaluate&Predict ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 loss, acc = model.evaluate(x_test, y_test, batch_size=1)
@@ -74,8 +73,6 @@ print("Accuracy: ", acc)
 
 # y_predict = model.predict(x_test)
 # print(y_predict)
-
-# RMSE solution
 
 x_input = np.array(range(95, 111))
 x_input = split_n(x_input, 7)
@@ -89,8 +86,8 @@ print(y_predict)
 aw = np.array(range(101, 111))
 aw = aw.reshape(10, 1)
 
+# RMSE solution
 from sklearn.metrics import mean_squared_error
 def RMSE(y_test, y_predict):
     return np.sqrt(mean_squared_error(y_test, y_predict))
 print("RMSE : ", RMSE(aw, y_predict))
-'''
