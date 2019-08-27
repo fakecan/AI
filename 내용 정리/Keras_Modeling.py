@@ -66,7 +66,7 @@ early_stopping = EarlyStopping(monitor='loss', patience=128, mode='auto')
 model.fit(x_train, y_train, epochs=128, batch_size=128,
           callbacks=[early_stopping], validation_data=(x_val, y_val))
 
-# ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ Model Evaluate&Predict ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+# ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ Model Evaluate & Predict ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 loss, acc = model.evaluate(x_test, y_test, batch_size=128)
 print("Accuracy: ", acc)
 
