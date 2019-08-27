@@ -12,16 +12,9 @@ Y = tf.placeholder(tf.float32, shape=[None, output])
 W = tf.Variable(tf.random_normal([input, output]), name='weight')
 b = tf.Variable(tf.random_normal([output]), name='bias')
 
-
-# ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 회귀(Regressor) ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-
-# Hypothesis
+# ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 회귀(Regression) ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 hypothesis = tf.matmul(X, W) + b
-
-# Cost/Loss function
 cost = tf.reduce_mean(tf.square(hypothesis - Y))
-
-# Minimize
 optimizer = tf.train.GradientDescentOptimizer(learning_rate=1e-5)
 train = optimizer.minimize(cost)
 
@@ -34,9 +27,9 @@ train = optimizer.minimize(cost)
 
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 분류(Classification) ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 hypothesis = tf.nn.softmax(tf.matmul(X, W) + b)
-
 cost = tf.reduce_mean(-tf.reduce_sum(Y * tf.log(hypothesis), axis=1)) # categorical_crossentropy
-
+# cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits( # cost가 같은 코드이다 v2도 있고ㅓ
+#     logits=hypothesis, labels=Y))
 optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.1).minimize(cost)
 
 # Correct prediction Test model
@@ -44,8 +37,15 @@ prediction = tf.argmax(hypothesis, 1)
 is_correct= tf.equal(prediction, tf.argmax(Y, 1))
 accuracy = tf.reduce_mean(tf.cast(is_correct, tf.float32))
 
+# prediction = tf.argmax(hypothesis, 1)
+# correct_prediction = tf.equal(prediction, tf.argmax(Y_one_hot, 1))
+# accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
+cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(
+    logits=hypothesis, labels=Y))
+optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost)
 
+# ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ Run ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 # Launch graph
 with tf.Session() as sess:
     # Initializes global variables in the graph.
@@ -65,7 +65,6 @@ with tf.Session() as sess:
 #     cost_val, hy_val, _ = sess.run(
 #         [cost, hypothesis, train], feed_dict={X: x_data, Y: y_data})
 #     print(step, "Cost: ", cost_val, "\nPrediction:\n", hy_val)
-
 
 
 # # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ sess.run 종류 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
