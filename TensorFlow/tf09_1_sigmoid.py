@@ -16,7 +16,7 @@ y_data = [[0],  # 0은 불합격, 1은 합격
           [1],
           [1]]
 
-# placeholdes for a tensor that will be always fed.
+# placeholders for a tensor that will be always fed.
 X = tf.placeholder(tf.float32, shape=[None, 2])
 Y = tf.placeholder(tf.float32, shape=[None, 1])
 
@@ -34,7 +34,7 @@ train = tf.train.GradientDescentOptimizer(learning_rate=0.01).minimize(cost)
 # Accuracy computatiom
 # True if hypothesis > 0.5 else False
 predicted = tf.cast(hypothesis > 0.5, dtype=tf.float32)
-accuracy = tf.reduce_mean(tf.cast(tf.equal(predicted, Y), dtype=tf.float32))    # 일반적인 선형 회귀에선 안된다
+accuracy = tf.reduce_mean(tf.cast(tf.equal(predicted, Y), dtype=tf.float32))    # 일반적인 선형 회귀에서는 안된다
 
 # Launch graph
 with tf.Session() as sess:

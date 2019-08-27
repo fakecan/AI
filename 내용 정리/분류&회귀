@@ -1,3 +1,4 @@
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 자주 사용하는 데이터 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 #   Mnist
 from keras.datasets import mnist
 from keras.utils import np_utils 
@@ -28,32 +29,17 @@ print(x_data.shape, y_data.shape) #(569, 30) (569,)
 
 #   boston 회귀
 
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ Machine Learning Category ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+SVC
+LinearSVC
+KNeighborsClassifier
+RandomForestClassifier
 
+KNeighborsRegressor
+RandomForestRegressor
+from sklearn.linear_model import LinearRegression, Ridge, Lasso
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ Scale ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 Normalization과 Regularization은 과적합(Overfitting)을 방지하고 데이터를 더욱
 밀집되게 하기 위해 사용된다. 즉, scale을 축소하는 과정이다.
 그 이유는 scale의 범위가 과하게 커지면 유의미하지 못한 데이터 생성이나 과적합의 가능성이
