@@ -14,6 +14,17 @@ x_train, x_test, y_train, y_test = train_test_split(
     x_data, y_data, random_state=0, train_size=0.8, test_size=0.2
 )
 
+size = ?
+def split_n(seq, size):
+    newList = []
+    for i in range(len(seq) - size + 1): # i= 0~5 6줗
+        subset = seq[i:(i+size)] # 0~5 : 4~9 1줄씩
+        newList.append([item for item in subset])
+    # print(type(newList))
+    return np.array(newList)
+
+dataset = split_n(arraySet, size)
+
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ Data Preprocessing ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 from keras.utils import to_categorical
 y_train = to_categorical(y_train)
