@@ -20,4 +20,3 @@ x_data = dataset[:, 0:6] #(6)
 y_data = dataset[:, -1] #(6, )
 print(x_data)
 print(y_data)
-cc
