@@ -50,8 +50,8 @@ x_train, x_test, y_train, y_test = train_test_split(
 
 x_train = x_train.reshape(-1, 1, 6)
 x_test = x_test.reshape(-1, 1, 6)
-print(x_train.shape, x_test.shape)  # (75, 1, 6) (19, 1, 6)
-print(x_train, "\n", x_test)
+# print(x_train.shape, x_test.shape)  # (75, 1, 6) (19, 1, 6)
+# print(x_train, "\n", x_test)
 
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ Model Design ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 model = Sequential()

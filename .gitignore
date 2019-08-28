@@ -1,2 +1,5 @@
 *.npy
 연습장.py
+Data/sample_submission.csv
+Data/test_ver2.csv
+Data/train_ver2.csv
