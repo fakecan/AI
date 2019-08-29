@@ -15,10 +15,12 @@ df = pd.read_csv('./data/train_ver2.csv')
 # for col in df.columns:  # 모든 column 변수 미리보기
 #     print('{}\n'.format(df[col].head()))
 
-# df.info()   # 정보 요약
+df.info()   # 정보 요약
 
-num_cols = [col for col in df.columns[:24] if df[col].dtype in ['int64', 'float64']]
-df[num_cols].describe()
+# num_cols = [col for col in df.columns[:24] if df[col].dtype in ['int64', 'float64']]
+# df[num_cols].describe()
 
-cat_cols = [col for col in df.columns[:24] if df[col].dtype in ['0']]
-df[cat_cols].describe()
+# cat_cols = [col for col in df.columns[:24] if df[col].dtype in ['0']]
+# df[cat_cols].describe()
+
+# for col in cat_cols = 
