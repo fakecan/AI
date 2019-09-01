@@ -6,3 +6,6 @@ Data/train_ver2.csv
 Data/santander-product-recommendation/sample_submission.csv
 Data/santander-product-recommendation/test_ver2.csv
 Data/santander-product-recommendation/train_ver2.csv
+Data/cat-in-the-dat/sample_submission.csv
+Data/cat-in-the-dat/test.csv
+Data/cat-in-the-dat/train.csv
