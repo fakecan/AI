@@ -18,7 +18,7 @@ df = pd.read_csv('./data/tem10y.csv', encoding="utf-8")
 
 # 데이터를 학습 전용과 테스트 전용으로 분리하기
 train_year = (df["연"] <= 2015)
-test_year = (df["연"] <= 2016)
+test_year = (df["연"] >= 2016)
 
 interval = 6
 
