@@ -86,11 +86,11 @@ print(y_predict)
 # y_predict = clf.predict(x_test)
 # print('Accuracy: ', accuracy_score(y_test, y_predict))
 
-# submission['target'] = y_predict
+# submission['target'] = y_predict.index
 
-# # submission = pd.DataFrame({
-# #     'id': test.id.values,
-# #     'target': y_pre
-# # })
+submission = pd.DataFrame({
+    # 'id': test.id.values,
+    'target': y_predict
+})
 
-submission.to_csv('/data/cat-in-the-dat/submission.csv', index=False)
+submission.to_csv('submission.csv', index=False)
