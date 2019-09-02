@@ -4,7 +4,7 @@ from sklearn.metrics import accuracy_score # 정확도
 from sklearn.neighbors import KNeighborsClassifier
 
 #1. 데이터
-x_data = [[0,0], [1,0], [0,1], [1,1]] # and 모델
+x_data = [[0,0], [1,0], [0,1], [1,1]] # xor 모델
 y_data = [0,1,1,0]
 
 #2. 모델
@@ -19,4 +19,4 @@ y_predict = model.predict(x_test)
 
 print(x_test, "의 예측결과 : ", y_predict)
 print("acc = ", accuracy_score([0,1,1,0], y_predict))
-# accuracy_score(y_data, y_predict)
+# print("Accuracy=", accuracy_score(y_data, y_predict))
