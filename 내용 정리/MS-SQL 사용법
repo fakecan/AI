@@ -1,0 +1,14 @@
+MS-SQL, SSMS 설치
+
+1. 실행
+첫 화면에서 '연결', 데이터베이스에서 '새 데이터베이스' 클릭 후 생성
+데이터베이스 생성 후, 생성한 데이터베이스 우클릭하고 태스크 - 데이터 가져오기
+Flat File source(파일 찾기) - Microsoft OLE DB Driver for SQL Server(SQL Server 인증 사용)
+
+보안 - 로그인 우클릭 후 새 로그인(SQL Server 인증) - 서버 역할(serveradmin, sysadmin 체크) -암호 생성 후
+
+@Sql Server 2017 구성 관리자
+1) SQL Server 네트워크 구성 - MSSQLSERVER에 대한 프로토콜 - TCP/IP 사용
+2) MS-SQL(Window 인증) 접속 후, 서버 우클릭 보안에서 SQL Server 및 Windows 인증 모드 체크
+3) 작업 관리자 - 서비스 - MSSQLSERVER 다시 시작
+4) MS-SQL(SQL Server 인증) 접속 
