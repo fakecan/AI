@@ -48,42 +48,14 @@ for c in X.columns:
 
 # print(train.head(3))
 # ■■■■■■■■■■■■■■■■              ■■■■■■■■■■■■■■■■
-# x_train, x_test, y_train, y_test = train_test_split(
-#     X, y, random_state = 66, test_size = 0.2
-# )
+print('train data set: {} row and {} columns'.format(train.shape[0], train.shape[1])) # 300000 row and 24 columns
+logistic(train, y)  # 0.6904
 # ■■■■■■■■■■■■■■■■ OneHotEncoder ■■■■■■■■■■■■■■■■
 from sklearn.preprocessing import OneHotEncoder
 onehot = OneHotEncoder()
 onehot.fit(X)
 train = onehot.transform(X)
 
-# print('train data set: {} row and {} columns'.format(train.shape[0], train.shape[1]))
 # ■■■■■■■■■■■■■■■■               ■■■■■■■■■■■■■■■■
-
+print('train data set: {} row and {} columns'.format(train.shape[0], train.shape[1]))   # 300000 row and 316461 columns
 logistic(train, y)  # Accuracy:  0.7622833333333333
-
-
-
-# from xgboost import XGBClassifier
-# parameters = {'max_depth': [2, 4, 6, 8, 10, 12]}
-
-# kfold_cv = KFold(n_splits=5, shuffle=True)
-# clf = RandomizedSearchCV(XGBClassifier(),
-#                          param_distributions=parameters,
-#                          cv=kfold_cv)
-
-# print('최적의 매개 변수 =', clf.best_estimator_)
-
-# clf.fit(x_train, y_train)
-
-# y_predict = clf.predict(x_test)
-# print('Accuracy: ', accuracy_score(y_test, y_predict))
-
-# submission['target'] = y_predict.index
-
-# submission = pd.DataFrame({
-#     # 'id': test.id.values,
-#     'target': y_predict
-# })
-
-# submission.to_csv('submission.csv', index=False)
