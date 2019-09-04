@@ -1,0 +1,43 @@
+1. 명령 프롬프트에서 pip install django
+2. D:\AI>   django-admin startproject mysite    (폴더명을 Django로 바꾼다)
+3. D:\AI\Django>    python manage.py startapp polls
+4. D:\AI\Django>    python manage.py migrate
+5. D:\AI\Django>    python manage.py runserver 0.0.0.0:8000     (서버 실행)
+6. CTRL + C로 종료 후,
+D:\AI\Django>python manage.py createsuperuser
+Username (leave blank to use 'bit'): bit
+Email address: bit@bit.com
+Password:   ex) 1234
+Password (again):   1234
+This password is too short. It must contain at least 8 characters.
+This password is too common.
+This password is entirely numeric.
+Bypass password validation and create user anyway? [y/N]: y
+Superuser created successfully. 
+
+Django - mysite - settings.py에서 입력
+27라인에    ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+39라인 아래에   'polls.apps.PollsConfig',
+108라인 쯤에 TIME_ZONE = 'Asia/Seoul'
+
+Django - polls - models.py에서 입력
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
+    pub_date = models.DateTimeField('date published')
+
+    def __str__(self):
+        return self.question_text
+
+class Choice(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(dafault=0)
+
+    def __str__(self):
+        return self.choice_text
+
+polls - admin.py에서 입력
+from polls.models import Question, Choice
+
+admin.site.register(Question)
+admin.site.register(Choice)
