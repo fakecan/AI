@@ -4,14 +4,14 @@ import sqlite3
 app = Flask(__name__)
 
 # database confirm
-conn = sqlite3.connect('.\\flask\\wanggun.db')
+conn = sqlite3.connect('flask/wanggun.db')    # '.\\flask\\wanggun.db' or 'flask/wanggun.db' or './flask/wanggun.db'
 cursor = conn.cursor()
 cursor.execute('SELECT * FROM general')
 print(cursor.fetchall())
 
 @app.route('/')
 def run():
-    conn = sqlite3.connect('.\\flask\\wanggun.db')
+    conn = sqlite3.connect('flask/wanggun.db')
     # conn.row_factory = sqlite3.Row
     c = conn.cursor()
     c.execute('SELECT * FROM general')
@@ -21,7 +21,7 @@ def run():
 @app.route('/modi')
 def modi():
     id = request.args.get('id')
-    conn = sqlite3.connect('.\\flask\\wanggun.db')
+    conn = sqlite3.connect('flask/wanggun.db')
     # conn.row_factory = sqlite3.Row
     c = conn.cursor()
     c.execute('SELECT * FROM general WHERE id='+str(id))
@@ -34,7 +34,7 @@ def addrec():
         try:
             war = request.form['war']
             id = request.form['id']
-            with sqlite3.connect('.\\flask\\wanggun.db') as con:
+            with sqlite3.connect('flask/wanggun.db') as con:
                 cur = con.cursor()
                 cur.execute("update general set war="+str(war)+" where id="+str(id))
                 con.commit()
