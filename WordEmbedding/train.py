@@ -17,5 +17,3 @@ model = word2vec.Word2Vec(sentences,
                           window=10)
 # 두번째 파라미터는 생성할 모델명
 model.save(sys.argv[2])
-
-
