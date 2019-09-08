@@ -9,3 +9,5 @@ Data/santander-product-recommendation/train_ver2.csv
 Data/cat-in-the-dat/sample_submission.csv
 Data/cat-in-the-dat/test.csv
 Data/cat-in-the-dat/train.csv
+mnist/
+MNIST_data/
