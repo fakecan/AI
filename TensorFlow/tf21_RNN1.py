@@ -21,10 +21,10 @@ _data = enc.transform(_data).toarray().astype('float32')    # float64에서 floa
 
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ Data Splitting ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 x_data = _data[:6, ]    # (6, 5)
-y_data = _data[1:, ]    # (6,)
+y_data = _data[1:, ]    # (6, 5)
 y_data = np.argmax(y_data, axis=1)
 # print(x_data)
-# print(y_data)
+print(y_data)   # [2 1 0 3 3 4]
 
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ Data Reshape ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 x_data = x_data.reshape(1, 6, 5)    # (1, 6, 5)
@@ -84,7 +84,7 @@ prediction = tf.argmax(outputs, axis=2)
 
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
-    for i in range(300):
+    for i in range(100):
         loss2, _ = sess.run([loss, train], feed_dict={X: x_data, Y: y_data})
         result = sess.run(prediction, feed_dict={X: x_data})
         print(i, "loss:", loss2, "prediction:", result, "true Y:", y_data)
