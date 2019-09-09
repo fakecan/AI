@@ -4,17 +4,12 @@
 
 # ## (1) 형태소분석
 
-# <br>
-
 # < 파이썬 한국어 자연어처리 패키지인 KoNLPy 설치 >
 
 # In[1]:
 
 
 # get_ipython().system('pip3 install konlpy')
-
-
-# <br>
 
 # < 꼬꼬마로 형태소분석 ><br><br>
 # nouns -> 명사만 추출<br>
@@ -47,12 +42,7 @@ print(komoran.morphs(u'자연어처리는 컴퓨터가 인간의 언어를 처�
 print(komoran.pos(u'자연어처리는 컴퓨터가 인간의 언어를 처리하도록 하는 인공지능입니다.'))
 
 
-#   <br>
-#   <br>
-#   <br>
-#   <br>
-#   <br>
-
+'''
 # ## (2) RNN으로 캐릭터 글자 예측
 
 # <br>
@@ -72,9 +62,9 @@ print(komoran.pos(u'자연어처리는 컴퓨터가 인간의 언어를 처리�
 # <br>
 # (에러 발생시 '런타임->모든 런타임 재설정' 후 처음부터 실행)
 # <br><br><br>
-'''
-# In[4]:
 
+# In[4]:
+'''
 
 import tensorflow as tf
 import numpy as np
@@ -272,7 +262,7 @@ print('정확도:', accuracy_val)
 # <br>
 # <br>
 # < transpose 추가 설명 >
-'''
+
 # In[6]:
 
 
@@ -297,12 +287,7 @@ print('\n')
 print(outputs)
 
 
-# <br>
-# <br>
-# <br>
-# <br>
-# <br>
-
+'''
 # ## (3) Seq2Seq로 단어 번역
 
 # <br>
@@ -512,4 +497,3 @@ print('love ->', translate('love'))
 print('loev ->', translate('loev'))
 print('abcd ->', translate('abcd'))
 
-'''

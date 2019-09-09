@@ -29,7 +29,6 @@ seq_data = ['word', 'wood', 'deep', 'dive', 'cold',
 def make_batch(seq_data):
     
     input_batch, target_batch = [], []
-    # target_batch = []
 
     for seq in seq_data:
         # input_batch, target_batch: 알파벳 배열의 인덱스 번호
@@ -147,3 +146,26 @@ print('\n======== 예측 결과 ========')
 print('입력값:', [w[:3] + ' ' for w in seq_data])
 print('예측값:', predict_words)
 print('정확도:', accuracy_val)
+
+print('================')
+# transpose 설명
+# outputs 결과에서 마지막 타임 스텝만 구함
+# outputs의 형태를 변경
+# outputs : [batch_size, n_step, n_hidden]
+#        -> [n_step, batch_size, n_hidden]
+#        -> [batch_size, n_hidden]
+#
+# batch_size -> 2
+# n_step -> 3
+# n_hidden -> 2
+outputs = [[[1,2], [3,4], [5,6]],
+           [[11,12], [13,14], [15,16]]]
+
+# 행렬의 차원을 [0, 1, 2]에서 [1, 0, 2]로 변경
+outputs = np.transpose(outputs, [1, 0, 2])  # (2, 3, 2) -> (3, 2, 2)
+print(outputs)
+
+# n_step을 삭제하고 마지막 타임 스텝만 구함
+outputs = outputs[-1]
+print('\n')
+print(outputs)
