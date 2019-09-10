@@ -26,10 +26,12 @@ def make_batch(seq_data):
     for seq in seq_data:
         # 인코더 셀의 입력값. 입력단어의 글자들을 한글자씩 떼어 배열로 만듬.
         input = [num_dic[n] for n in seq[0]]
+        print('input\n', input)
         
         # 디코더 셀의 입력값. 시작을 나타내는 S 심볼을 맨 앞에 붙여줌.
         output = [num_dic[n] for n in ('S' + seq[1])]
-        
+        print('output\n', output)        
+
         # 학습을 위해 비교할 디코더 셀의 출력값. 끝나는 것을 알려주기 위해 마지막에 E 를 붙임.
         target = [num_dic[n] for n in (seq[1] + 'E')]
 
