@@ -1,5 +1,5 @@
 '''
-불용어: 문장 내에서 별 도움이 되지 않는 단어 코튼을 제거하는 작업
+불용어: 문장 내에서 별 도움이 되지 않는 단어 토큰을 제거하는 작업
 '''
 import nltk
 from nltk.corpus import stopwords

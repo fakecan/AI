@@ -7,7 +7,7 @@ from intent.classifier import get_intent
 
 def run():
     while True:
-        print('고잉메리호 챗봇입니다. 어디로 여행을 가시겠어요?(한국)')
+        print('챗봇입니다. 어디로 여행을 가시겠어요? : ')
         print('User : ', sep='', end='')
         speech = preprocess(input())
         print('Preprocessed : ' + speech, sep='')
@@ -18,6 +18,8 @@ def preprocess(speech) -> str:
     speech = tokenize(speech)
     speech = fix(speech)
     return speech
+
+def get_entity(intent, speech):
 
 
 
