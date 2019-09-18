@@ -17,3 +17,6 @@ cnn 이미지
 https://myjamong.tistory.com/70  
 http://photo.visitjeju.net/  
 https://twinw.tistory.com/252
+  
+keras26_CIFAR10.py  
+m28_autoencoder_cifar10_cnn.py 시각화 참고  

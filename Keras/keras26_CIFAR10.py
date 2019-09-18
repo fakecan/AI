@@ -111,3 +111,8 @@ plt.ylabel('loss')
 plt.xlabel('epoch')
 plt.legend(['train', 'test'], loc = 'upper left')
 plt.show()
+
+# 결과값
+# Test score :  1.067061791419983
+# Test accuracy :  0.6684
+# dict_keys(['val_loss', 'val_acc', 'loss', 'acc'])

@@ -50,8 +50,8 @@ decoder_layer = autoencoder.layers[-1]
 decoder = Model(encoded_input, decoder_layer(encoded_input))
 
 # autoencoder.summary()
-# encoder.summary()
-# decoder.summary()
+encoder.summary()
+decoder.summary()
 
 autoencoder.compile(optimizer='adam',
                     loss='binary_crossentropy', metrics=['accuracy'])
