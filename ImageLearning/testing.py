@@ -42,6 +42,8 @@ validation_set = train_datagen.flow_from_directory('./data/',
 
 training_set = np.array(training_set)
 validation_set = np.array(validation_set)
+np.save('training_set.npy', training_set)
+np.save('validation_set.npy', validation_set)
 
 
 csv_logger = CSVLogger('./log.csv', append=True, separator=';')
