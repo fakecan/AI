@@ -58,8 +58,8 @@ history = autoencoder.fit(x_train, x_train,
 encoded_imgs = encoder.predict(x_test)
 decoded_imgs = decoder.predict(encoded_imgs)
 
-print(encoded_imgs)
-print(decoded_imgs)
+print('encoded_imgs', encoded_imgs)
+print('decoded_imgs', decoded_imgs)
 print(encoded_imgs.shape) # (10000, 32)
 print(decoded_imgs.shape) # (10000, 784)
 

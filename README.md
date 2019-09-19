@@ -20,3 +20,10 @@ https://twinw.tistory.com/252
   
 keras26_CIFAR10.py  
 m28_autoencoder_cifar10_cnn.py 시각화 참고  
+keras 이미지 분류  
+https://archive.htrucci.com/1189/keras-coreml-cnn-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%B6%84%EB%A5%98-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9C%BC%EB%A1%9C-%EC%B9%B4%EB%A9%94%EB%9D%BC-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%9D%B8%EC%8B%9D/  
+  
+케라스 돌리기
+https://archive.htrucci.com/1189/keras-coreml-cnn-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%B6%84%EB%A5%98-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9C%BC%EB%A1%9C-%EC%B9%B4%EB%A9%94%EB%9D%BC-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%9D%B8%EC%8B%9D/
+  
+  https://keras.io/preprocessing/image/
