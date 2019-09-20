@@ -56,10 +56,3 @@ np.set_printoptions(formatter={'float': lambda x: "{0:0.3f}".format(x)})
 print(test_generator.class_indices)
 print(output)
 print(test_generator.filenames)
-
-# from IPython.display import SVG
-# from keras.utils.vis_utils import model_to_dot
-# %matplotlib inline
-# SVG(model_to_dot(model, show_shapes=True).create(prog='dot', format='svg'))
-# plt.show()
-
