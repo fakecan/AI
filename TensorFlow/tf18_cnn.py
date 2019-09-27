@@ -21,7 +21,7 @@ W1 = tf.Variable(tf.random_normal([3, 3, 1, 32], stddev=0.01))
 print("W1: ", W1)   # shape=(3, 3, 1, 32)
 #   Conv    ->   (?, 28, 28, 32)
 #   Pool    ->   (?, 14, 14, 32)
-L1 = tf.nn.conv2d(X_img, W1, strides=[1, 1, 1, 1], padding='SAME')  # stride: 몇 칸씩 움직일 것인가
+L1 = tf.nn.conv2d(X_img, W1, strides=[1, 1, 1, 1], padding='SAME')  # strides: 몇 칸씩 움직일 것인가
 #                                       [    ] 가운데 값 두개만 주로 쓴다. 바깥 2개는 거의 고정
 print("L1: ", L1)   # shape=(?, 28, 28, 32)
 L1 = tf.nn.relu(L1)
