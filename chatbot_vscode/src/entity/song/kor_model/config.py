@@ -1,17 +1,17 @@
 class config():
     embedding = "facebook"  # fasttext, word2vec, facebook
-    embedding_model_path = "./Chatbot-vscode/src/entity/song/data/w2v"
-    crawler_path = "./Chatbot-vscode/src/entity/song/data/crawler/"
-    crawler_file = './Chatbot-vscode/src/entity/song/source.txt'
-    pos_path = "./Chatbot-vscode/src/entity/song/data/crawler/pos.txt"
-    trimmed_filename = "./Chatbot-vscode/src/entity/song/data/processed/kor/w2v.trimmed.npz"
-    charembed_filename = "./Chatbot-vscode/src/entity/song/data/processed/kor/char.trimmed.npz"
-    words_filename = "./Chatbot-vscode/src/entity/song/data/processed/kor/words.txt"
-    tags_filename = "./Chatbot-vscode/src/entity/song/data/processed/kor/tags.txt"
-    chars_filename = "./Chatbot-vscode/src/entity/song/data/processed/kor/chars.txt"
-    dev_filename = "./Chatbot-vscode/src/entity/song/train_entity.csv"
-    test_filename = "./Chatbot-vscode/src/entity/song/train_entity.csv"
-    train_filename = "./Chatbot-vscode/src/entity/song/train_entity.csv"
+    embedding_model_path = "./src/entity/song/data/w2v"
+    crawler_path = "./src/entity/song/data/crawler/"
+    crawler_file = './src/entity/song/source.txt'
+    pos_path = "./src/entity/song/data/crawler/pos.txt"
+    trimmed_filename = "./src/entity/song/data/processed/kor/w2v.trimmed.npz"
+    charembed_filename = "./src/entity/song/data/processed/kor/char.trimmed.npz"
+    words_filename = "./src/entity/song/data/processed/kor/words.txt"
+    tags_filename = "./src/entity/song/data/processed/kor/tags.txt"
+    chars_filename = "./src/entity/song/data/processed/kor/chars.txt"
+    dev_filename = "./src/entity/song/train_entity.csv"
+    test_filename = "./src/entity/song/train_entity.csv"
+    train_filename = "./src/entity/song/train_entity.csv"
     dim = 300
     dim_char = 120
     max_iter = None
@@ -28,6 +28,6 @@ class config():
     char_hidden_size = 128
     crf = True  # size one is not allowed
     chars = True  # if char embedding, training is 3.5x slower
-    output_path = "./Chatbot-vscode/src/entity/song/results/crf/"
+    output_path = "./src/entity/song/results/crf/"
     model_output = output_path + "model.weights/"
     log_path = output_path + "log.txt"

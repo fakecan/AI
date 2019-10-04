@@ -5,6 +5,7 @@
 from crawler import restaurant as crawler
 
 def restaurant(named_entity):
+    print(type(named_entity))
     keyword_group = named_entity[0]
     entity_group = named_entity[1]
     location = []

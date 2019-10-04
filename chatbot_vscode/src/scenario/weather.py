@@ -7,21 +7,26 @@ import crawler.weather as crawler
 
 
 def weather(named_entity):
-    keyword_group = named_entity[0] # ['내일', '광명', '날씨', '알려줘']
-    entity_group = named_entity[1]  # ['DATE', 'LOCATION', 'O', 'O']
+    keyword_group = named_entity[0]
+    entity_group = named_entity[1]
+    # print(keyword_group)    # 수정
+    # print(entity_group)     # 수정
     date = []
     location = []
 
-    for k in zip(keyword_group, entity_group):  # zip: 키워드 그룹과 엔티티 그룹을 같이 나열
-        if 'DATE' in k[1]:  # 날짜가 있으면 date에 저장
+    for k in zip(keyword_group, entity_group):
+        if 'DATE' in k[1]:
             date.append(k[0])
-        elif 'LOCATION' in k[1]:    # 위치가 있으면 location에 저장
+        elif 'LOCATION' in k[1]:
             location.append(k[0])
 
-    if len(date) == 0:  # 날짜 얘기가 없으면 '오늘'로 하겠다.
+    # print('date: ', date)
+    # print('location: ', location)
+
+    if len(date) == 0:
         date.append('오늘')
 
-    if len(location) == 0:  # 지역이 없으면 지역을 설정해주세요.
+    if len(location) == 0:
         while len(location) == 0:
             print('A.I : ' + '어떤 지역을 알려드릴까요?')
             print('User : ', end='', sep='')
@@ -29,7 +34,7 @@ def weather(named_entity):
             if loc is not None and loc.replace(' ', '') != '':
                 location.append(loc)
 
-    if '오늘' in date:  # 카테고리: 오늘, 내일, 모레, 내일모레, 이번주 등
+    if '오늘' in date:
         return crawler.today_weather(' '.join(location))
     elif date[0] == '내일':
         return crawler.tomorrow_weather(' '.join(location))
