@@ -18,7 +18,7 @@ from .response import Checked
 
 _agent = requests.Session()
 PY3 = sys.version_info[0] == 3
-my_dict = pd.read_csv('./Chatbot-vscode/src/util/hanspell/spell_dict.csv')
+my_dict = pd.read_csv('./src/util/hanspell/spell_dict.csv')
 spell_dict = {}
 
 for k, v in my_dict.values:

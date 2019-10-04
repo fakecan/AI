@@ -12,7 +12,7 @@ class IntentConfigs:
     train_fasttext = True
     tokenizing = True
 
-    root_path = './Chatbot-vscode/src/intent/'
+    root_path = './src/intent/'
     model_path = root_path + 'model/'
     fasttext_path = root_path + 'fasttext/'
 

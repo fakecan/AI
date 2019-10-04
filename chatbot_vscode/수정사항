@@ -1,7 +1,0 @@
-1. src. 제거
-2. src/intent/configs.py pd.read_csv 경로 수정
-3. src/scenario/util/hanspell/spell_checker.py 경로 수정 './src/util/hanspell/spell_dict.csv'
-4. src/entity/weather/kor_model/config.py
-entit/?/kor_model/config.py에서 entity/를 ./src/entity/로 수정
-
-송파구 수정 안됨
