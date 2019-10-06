@@ -17,3 +17,9 @@ chatbot_vscode/src/entity/translate/kor_model/__pycache__/config.cpython-37.pyc
 chatbot_vscode/src/entity/weather/kor_model/__pycache__/config.cpython-37.pyc
 chatbot_vscode/src/entity/wiki/kor_model/__pycache__/config.cpython-37.pyc
 chatbot_vscode/src/intent/__pycache__/configs.cpython-37.pyc
+chatbot_vscode/src/entity/restaurant/kor_model/__pycache__/config.cpython-37.pyc
+chatbot_vscode/src/entity/song/kor_model/__pycache__/config.cpython-37.pyc
+chatbot_vscode/src/entity/translate/kor_model/__pycache__/config.cpython-37.pyc
+chatbot_vscode/src/entity/weather/kor_model/__pycache__/config.cpython-37.pyc
+chatbot_vscode/src/entity/wiki/kor_model/__pycache__/config.cpython-37.pyc
+chatbot_vscode/src/intent/__pycache__/configs.cpython-37.pyc
