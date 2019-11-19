@@ -13,7 +13,7 @@ import numpy as np
 # print(y_test.shape)     # (10000,)
 
 x_train = np.array(x_train).reshape((-1,np.prod(x_train.shape[1:])))
-x_test = np.array(x_test).reshape((-1,np.prod(x_train.shape[1:])))
+x_test = np.array(x_test).reshape((-1,np.prod(x_test.shape[1:])))
 # x_train = x_train.reshape(60000, 28*28)     # (60000, 784)
 # x_test = x_test.reshape(10000, 28*28)       # (10000, 784)
 # print(x_train.shape)
