@@ -6,7 +6,8 @@ import tensorflow as tf
 # seed 값 생성
 seed = 0
 np.random.seed(seed)
-tf.set_random_seed(seed)
+tf.random.set_seed(seed)
+# tf.set_random_seed(seed)
 
 # # 데이터 로드
 # dataset = numpy.loadtxt(".\data\pima-indians-diabetes.csv", delimiter=",") # .: 현재 루트
@@ -32,7 +33,7 @@ model.compile(loss='binary_crossentropy', # 이진분류모델
                 metrics=['accuracy'])
 
 # 모델 실행
-model.fit(X, Y, epochs=512, batch_size=10)
+model.fit(X, Y, epochs=256, batch_size=10)
 
 # 결과 출력
 # print("\n Accuracy: %.4f" % (model.evaluate(X, Y)[1]))
@@ -41,4 +42,5 @@ loss, acc = model.evaluate(X, Y)
 print("acc : ", acc)
 print("loss : ", loss)
 y_predict = model.predict(X)
+np.set_printoptions(formatter={'float': lambda x: "{0:0.3f}".format(x)})
 print("y_predict :\n", y_predict)
